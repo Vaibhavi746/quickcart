@@ -19,6 +19,8 @@ export default function Home() {
   const [instamartPrice, setInstamartPrice] = useState("");
   const [message, setMessage] = useState("");
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [category, setCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
 
   async function fetchProducts(){
@@ -131,9 +133,11 @@ export default function Home() {
   const zeptoSavings= zeptoTotal - cheapestPrice;
   const instamartSavings= instamartTotal - cheapestPrice;
 
-  const filteredProducts = products.filter(
-    (product)=>
-      product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredProducts= products.filter(
+    (product)=> product.name.toLowerCase().includes(searchTerm.toLowerCase())&& 
+    (selectedCategory==="all" ||
+      product.category===selectedCategory
+    )
   );
 
   function getCheapestPrice(product:any){
@@ -161,6 +165,7 @@ export default function Home() {
     headers:{ "Content-Type" : "application/json",},
   body: JSON.stringify({
     name: productName,
+    category: category,
     prices:{
       blinkit: Number(blinkitPrice),
       zepto: Number(zeptoPrice),
@@ -185,6 +190,7 @@ export default function Home() {
         body: JSON.stringify({
           
           name: productName,
+          category: category,
           prices: {
             blinkit: Number(blinkitPrice),
             zepto: Number(zeptoPrice),
@@ -223,6 +229,7 @@ export default function Home() {
     // console.log("edit clicked:", product);
     setEditingId(product._id);
     setProductName(product.name);
+    setCategory(product.category || "");
     setBlinkitPrice( product.prices.blinkit.toString());
     setZeptoPrice( product.prices.zepto.toString());
     setInstamartPrice( product.prices.instamart.toString());
@@ -255,6 +262,22 @@ export default function Home() {
            value={productName}
            onChange={(e)=> setProductName(e.target.value)}
            className="border p-3 rounded w-full mb-4 bg-white text-black"/>
+
+           <select
+             value={category}
+             onChange={(e)=>
+              setCategory(e.target.value)
+             }
+             className="border p-3 rounded w-full mb-4 bg-white text-black"
+            >
+              <option value="">Select Category</option>
+              <option value="Dairy">Dairy</option>
+              <option value="Snacks">Snacks</option>
+              <option value="Sweets">Sweets</option>
+              <option value="Beverages">Beverages</option>
+              <option value="Groceries">Groceries</option>
+              <option value="Personal Care">Personal Care</option>
+            </select>
 
         <input
           type="number"
@@ -291,6 +314,20 @@ export default function Home() {
         onChange={(e)=> setSearchTerm(e.target.value)}
         className="border p-3 rounded w-full mb-6 bg-white text-black"
       />
+
+      <select value={selectedCategory}
+              onChange={(e)=>
+                setSelectedCategory(e.target.value)
+              }
+              className="border p-3 rounded mb-6 ml-4 bg-white text-black">
+                <option value="all">All Categories</option>
+                <option value="Dairy">Dairy</option>
+                <option value="Snacks">Snacks</option>
+                <option value="Sweets">Sweets</option>
+                <option value="Beverages">Beverages</option>
+                <option value="Groceries">Groceries</option>
+                <option value="Personal Care">Personal Care</option>
+              </select>
 
       <select
         value={sortOption}

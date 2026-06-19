@@ -1,6 +1,7 @@
 type Product = {
   _id: string;
   name: string;
+  category: string;
   prices: {
     blinkit: number;
     zepto: number;
@@ -31,6 +32,8 @@ export default function ProductCard({
       <h2 className="text-2xl font-semibold">
         {product.name}
       </h2>
+
+      <p className="text-sm text-gray-500"> {product.category}</p>
 
       <p className="text-lg">
           Zepto: ₹{product.prices.zepto}
