@@ -72,6 +72,16 @@ export default function Home() {
     }
   }
 
+  function resetForm(){
+     setProductName("");
+     setCategory("");
+     setBlinkitPrice("");
+     setZeptoPrice("");
+     setInstamartPrice("");
+     setMessage("");
+     setEditingId(null);
+  }
+
   function increaseQuantity(id: number) {
     const updatedCart = cart.map((item) =>
       item._id === id
@@ -160,6 +170,13 @@ export default function Home() {
   }
 
   async function addNewProduct(){
+    if(
+     !productName || !category || Number(blinkitPrice)<=0 ||
+     Number(zeptoPrice)<=0 || Number(instamartPrice)<=0
+    ){
+    setMessage("Please fill all the fields with valid values");
+    return;
+    }
     const response = await fetch("/api/products",{
       method: "POST",
     headers:{ "Content-Type" : "application/json",},
@@ -176,6 +193,7 @@ export default function Home() {
   setMessage(data.message);
   await fetchProducts();
   setProductName("");
+  setCategory("");
   setBlinkitPrice("");
   setZeptoPrice("");
   setInstamartPrice("");
@@ -306,6 +324,11 @@ export default function Home() {
               className="bg-blue-500 text-white px-4 py-2 rounded">
                 {editingId ? "Update Product" : "Add Product"}
             </button>
+            <button 
+              onClick={resetForm}
+              className="bg-gray-500 text-white px-4 py-2 rounded ml-3">
+                Reset
+              </button>
       </div>
       <input
         type="text"
