@@ -2,6 +2,7 @@ type Product = {
   _id: string;
   name: string;
   category: string;
+  image?: string;
   prices: {
     blinkit: number;
     zepto: number;
@@ -29,6 +30,10 @@ export default function ProductCard({
 }: Props) {
   return (
     <div className="border p-4 rounded-lg">
+      <img src={product.image ||  "https://images.unsplash.com/photo-1542838132-92c53300491e"}
+       alt={product.name}
+       className="w-full h-48 object-cover rounded-lg mb-4"
+      />
       <h2 className="text-2xl font-semibold">
         {product.name}
       </h2>

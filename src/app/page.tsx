@@ -21,6 +21,7 @@ export default function Home() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [category, setCategory] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [imageUrl, setImageUrl] = useState("");
 
 
   async function fetchProducts(){
@@ -80,6 +81,7 @@ export default function Home() {
      setInstamartPrice("");
      setMessage("");
      setEditingId(null);
+     setImageUrl("");
   }
 
   function increaseQuantity(id: number) {
@@ -183,6 +185,7 @@ export default function Home() {
   body: JSON.stringify({
     name: productName,
     category: category,
+    image: imageUrl ||  "https://images.unsplash.com/photo-1542838132-92c53300491e",
     prices:{
       blinkit: Number(blinkitPrice),
       zepto: Number(zeptoPrice),
@@ -248,6 +251,7 @@ export default function Home() {
     setEditingId(product._id);
     setProductName(product.name);
     setCategory(product.category || "");
+    setImageUrl(product.image || "");
     setBlinkitPrice( product.prices.blinkit.toString());
     setZeptoPrice( product.prices.zepto.toString());
     setInstamartPrice( product.prices.instamart.toString());
@@ -296,6 +300,13 @@ export default function Home() {
               <option value="Groceries">Groceries</option>
               <option value="Personal Care">Personal Care</option>
             </select>
+
+            <input type="text"
+                   placeholder="Image URL (optional)"
+                   value={imageUrl}
+                   onChange={(e)=> setImageUrl(e.target.value)}
+                   className= "border p-3 rounded w-full mb-4 bg-white text-black" 
+            />
 
         <input
           type="number"
@@ -367,7 +378,7 @@ export default function Home() {
           Most Expensive
         </option>
       </select>
-      <div className="grid gap-4 mb-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-10">
         {sortedProducts.map((product) => (
           <ProductCard
             key={product._id}
