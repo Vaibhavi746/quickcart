@@ -40,29 +40,29 @@ export default function ProductCard({
  const defaultImage= categoryImages[product.category] || "https://images.unsplash.com/photo-1542838132-92c53300491e";
   
   return (
-    <div className="border p-4 rounded-lg">
+    <div className="bg-stone-50 border border-stone-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-200">
       <img src={product.image || defaultImage}
        alt={product.name}
-       className="w-full h-32 object-cover rounded-lg mb-4"
+       className="w-full h-28 object-cover rounded-lg mb-3"
       />
-      <h2 className="text-2xl font-semibold">
+      <h2 className="text-sm text-green-700 font-medium">
         {product.name}
       </h2>
 
       <p className="text-sm text-gray-500"> {product.category}</p>
 
-      <p className="text-lg">
+      <p className="text-sm text-gray-700">
           Zepto: ₹{product.prices.zepto}
       </p>
 
-      <p className="text-lg">
+      <p className="text-sm text-gray-700">
            Blinkit: ₹{product.prices.blinkit}
       </p>
 
-      <p className="text-lg">
+      <p className="text-sm text-gray-700">
            Instamart: ₹{product.prices.instamart}
       </p>
-      
+
       <button
         onClick={() => addToCart(product)}
         className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 mt-2 rounded"
@@ -75,13 +75,13 @@ export default function ProductCard({
           console.log("delete clicked", product._id);
           deleteProduct(product._id);
         }}
-        className= "bg-red-500 text-white px-4 py-2 rounded mt-2">
+        className= "bg-red-500 text-white px-3 py-1.5 rounded mt-2">
           Delete
         </button>
 
         <button 
           onClick={()=> editProduct(product)}
-          className ="bg-yellow-500 text-white px-4 py-2 rounded mt-2">
+          className ="bg-yellow-500 text-white px-3 py-1.5 rounded mt-2">
             Edit
           </button>
     </div>

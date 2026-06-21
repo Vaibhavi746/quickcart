@@ -84,7 +84,7 @@ export default function Home() {
      setImageUrl("");
   }
 
-  function increaseQuantity(id: number) {
+  function increaseQuantity(id: string) {
     const updatedCart = cart.map((item) =>
       item._id === id
         ? {
@@ -97,7 +97,7 @@ export default function Home() {
     setCart(updatedCart);
   }
 
-  function decreaseQuantity(id: number) {
+  function decreaseQuantity(id: string) {
     const updatedCart = cart
       .map((item) =>
         item._id === id
@@ -260,17 +260,23 @@ export default function Home() {
 
 
   return (
-    <div className="p-8">
-      <h1 className="text-4xl font-bold mb-4">
-        QuickCart
-      </h1>
+    <div className="min-h-screen bg-amber-50 text-gray-900">
+       <main className="max-w-6xl mx-auto p-6">
+      <div className="mb-8">
+         <h1 className="text-4xl font-bold text-green-700">
+          QuickCart
+         </h1>
 
-      <p className="mb-6 text-xl">
-        Cart Items: {cart.length}
-      </p>
+          <p className="text-gray-600 mt-2">
+             Compare grocery prices across Blinkit, Zepto and Instamart.
+          </p>
+            <p className="mt-3 text-lg font-semibold">
+               Cart Items: {cart.length}
+            </p>
+      </div>
 
-      <div className="mb-8 border p-4 rounded">
-        <h2 className="text-2x1 font-bold mb-4">
+      <div className="mb-8 bg-stone-50 border border-stone-200 rounded-xl p-6 shadow-sm">
+        <h2 className="text-2xl font-bold mb-4">
           Admin Panel
         </h2>
 
@@ -476,7 +482,7 @@ export default function Home() {
           </div>
         )}
         </div>
-      
+      </main>
       
     </div>
   );
