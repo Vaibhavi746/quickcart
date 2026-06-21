@@ -28,11 +28,22 @@ export default function ProductCard({
   deleteProduct,
   editProduct,
 }: Props) {
+
+  const categoryImages: Record<string, string>={
+     Dairy: "https://images.unsplash.com/photo-1550583724-b2692b85b150",
+     Snacks: "https://images.unsplash.com/photo-1566478989037-eec170784d0b",
+     Beverages: "https://images.unsplash.com/photo-1544145945-f90425340c7e",
+     Groceries: "https://images.unsplash.com/photo-1542838132-92c53300491e",
+    "Personal Care": "https://images.unsplash.com/photo-1526947425960-945c6e72858f",
+     Sweets: "https://images.unsplash.com/photo-1551024601-bec78aea704b",
+ };
+ const defaultImage= categoryImages[product.category] || "https://images.unsplash.com/photo-1542838132-92c53300491e";
+  
   return (
     <div className="border p-4 rounded-lg">
-      <img src={product.image ||  "https://images.unsplash.com/photo-1542838132-92c53300491e"}
+      <img src={product.image || defaultImage}
        alt={product.name}
-       className="w-full h-48 object-cover rounded-lg mb-4"
+       className="w-full h-32 object-cover rounded-lg mb-4"
       />
       <h2 className="text-2xl font-semibold">
         {product.name}
@@ -51,7 +62,7 @@ export default function ProductCard({
       <p className="text-lg">
            Instamart: ₹{product.prices.instamart}
       </p>
-
+      
       <button
         onClick={() => addToCart(product)}
         className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 mt-2 rounded"

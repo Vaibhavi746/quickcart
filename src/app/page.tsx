@@ -225,6 +225,7 @@ export default function Home() {
    await fetchProducts();
    setEditingId(null);
    setProductName("");
+   setCategory("");
    setBlinkitPrice("");
    setZeptoPrice("");
    setInstamartPrice("");
