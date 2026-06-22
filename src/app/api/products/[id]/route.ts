@@ -52,6 +52,7 @@ export async function PUT(
       $set: {
         name: body.name,
         category: body.category,
+        image: body.image,
         prices: body.prices,
       },
     }

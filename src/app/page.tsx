@@ -212,6 +212,7 @@ export default function Home() {
           
           name: productName,
           category: category,
+          image: imageUrl,
           prices: {
             blinkit: Number(blinkitPrice),
             zepto: Number(zeptoPrice),
@@ -226,6 +227,7 @@ export default function Home() {
    setEditingId(null);
    setProductName("");
    setCategory("");
+   setImageUrl("");
    setBlinkitPrice("");
    setZeptoPrice("");
    setInstamartPrice("");
