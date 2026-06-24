@@ -114,19 +114,19 @@ QuickCart computes potential savings by comparing platform totals and highlights
 
 ### Home Page
 
-![Home Page](screenshots/home-page.png)
+<img src="screenshots/home-page.png" width="700">
 
 ### Product Catalog (Admin View)
 
-![Product Catalog](screenshots/products.png)
+<img src="screenshots/products.png" width="700">
 
 ### Cart Comparison
 
-![Cart Comparison](screenshots/cart-summary.png)
+<img src="screenshots/cart-summary.png" width="700">
 
 ### Admin Panel
 
-![Admin Panel](screenshots/admin-panel.png)
+<img src="screenshots/admin-panel.png" width="700">
 
 ---
 
