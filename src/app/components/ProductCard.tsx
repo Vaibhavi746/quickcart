@@ -20,6 +20,7 @@ type Props = {
   addToCart: (product: Product) => void;
   deleteProduct: (id: string)=> void;
   editProduct: (product: Product)=> void;
+  isAdmin: boolean;
 };
 
 export default function ProductCard({
@@ -27,6 +28,7 @@ export default function ProductCard({
   addToCart,
   deleteProduct,
   editProduct,
+  isAdmin,
 }: Props) {
 
   const categoryImages: Record<string, string>={
@@ -69,7 +71,8 @@ export default function ProductCard({
       >
         Add to Cart
       </button>
-
+     
+     {isAdmin && (
       <button 
         onClick={()=>{
           console.log("delete clicked", product._id);
@@ -78,12 +81,14 @@ export default function ProductCard({
         className= "bg-red-500 text-white px-3 py-1.5 rounded mt-2">
           Delete
         </button>
-
+     )}
+     {isAdmin && (
         <button 
           onClick={()=> editProduct(product)}
           className ="bg-yellow-500 text-white px-3 py-1.5 rounded mt-2">
             Edit
           </button>
+      )}
     </div>
   );
 }

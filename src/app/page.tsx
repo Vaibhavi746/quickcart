@@ -22,6 +22,9 @@ export default function Home() {
   const [category, setCategory] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [imageUrl, setImageUrl] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [adminPassword, setAdminPassword] = useState("");
+  const ADMIN_PASSWORD = "quickcart123";
 
 
   async function fetchProducts(){
@@ -268,6 +271,42 @@ export default function Home() {
          <h1 className="text-4xl font-bold text-green-700">
           QuickCart
          </h1>
+         <div className="mb-6">
+            {!isAdmin && (
+              <input type="password"
+                     placeholder="Admin password"
+                     value={adminPassword}
+                     onChange={(e)=>setAdminPassword(e.target.value)}
+                     className="border p-2 rounded mr-3 bg-white text-black"  />
+            )}
+            <button
+             onClick={()=>{
+              if(isAdmin){
+                setIsAdmin(false);
+                setAdminPassword("");
+                return;
+              }
+              if(adminPassword===ADMIN_PASSWORD){
+                setIsAdmin(true);
+                setAdminPassword("");
+                setMessage("");
+              } else{
+                setMessage("Incorrect admin password");
+                setAdminPassword("");
+                setTimeout(()=>{
+                  setMessage("");
+                }, 2000);
+              }
+             }}
+             className="bg-gray-800 text-white px-4 py-2 rounded-lg" >
+              {isAdmin ? "Exit Admin Mode" : "Enter Admin Mode"}
+             </button>
+      </div>
+      {message && (
+          <p className="mb-4 font-semibold">
+            {message}
+          </p>
+      )}
 
           <p className="text-gray-600 mt-2">
              Compare grocery prices across Blinkit, Zepto and Instamart.
@@ -276,17 +315,12 @@ export default function Home() {
                Cart Items: {cart.length}
             </p>
       </div>
-
-      <div className="mb-8 bg-stone-50 border border-stone-200 rounded-xl p-6 shadow-sm">
+    {isAdmin && (
+       <div className="mb-8 bg-stone-50 border border-stone-200 rounded-xl p-6 shadow-sm">
         <h2 className="text-2xl font-bold mb-4">
           Admin Panel
         </h2>
 
-        {message && (
-          <p className="mb-4 font-semibold">
-            {message}
-          </p>
-        )}
         <input
            type="text"
            placeholder="Product Name"
@@ -350,6 +384,8 @@ export default function Home() {
                 Reset
               </button>
       </div>
+      )}
+      
       <input
         type="text"
         placeholder="Search products"
@@ -395,6 +431,7 @@ export default function Home() {
             addToCart={addToCart}
             deleteProduct={deleteProduct}
             editProduct= {editProduct}
+            isAdmin={isAdmin}
           />
         ))}
       </div>
