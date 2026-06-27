@@ -1,3 +1,7 @@
+"use client";
+import { useState } from "react";
+import PriceHistoryModal from "./PriceHistoryModal";
+
 type Product = {
   _id: string;
   name: string;
@@ -30,6 +34,7 @@ export default function ProductCard({
   editProduct,
   isAdmin,
 }: Props) {
+  const [showHistory, setShowHistory] = useState(false);
 
   const categoryImages: Record<string, string>={
      Dairy: "https://images.unsplash.com/photo-1550583724-b2692b85b150",
@@ -71,6 +76,13 @@ export default function ProductCard({
       >
         Add to Cart
       </button>
+
+      <button
+         onClick={() => setShowHistory(true)}
+         className="bg-indigo-600 text-white px-3 py-1 rounded mt-2"
+      >
+           View Price History
+      </button>
      
      {isAdmin && (
       <button 
@@ -88,6 +100,14 @@ export default function ProductCard({
           className ="bg-yellow-500 text-white px-3 py-1.5 rounded mt-2">
             Edit
           </button>
+      )}
+
+      {showHistory && (
+        <PriceHistoryModal
+          productId={product._id}
+          productName={product.name}
+          onClose={() => setShowHistory(false)}
+        />
       )}
     </div>
   );
